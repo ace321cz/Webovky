@@ -4,13 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Milan Kortus | Tvorba moderních statických webů</title>
+
+    <!-- Meta tagy pro sociální sítě (WhatsApp, Facebook, Messenger) -->
+    <meta property="og:title" content="Milan Kortus | Tvorba moderních statických webů">
+    <meta property="og:description" content="Kompletní reprezentativní web pro vaše podnikání za 3 000 Kč. Blesková rychlost, nulové měsíční poplatky.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ace321cz.github.io/Webovky/">
     
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         :root {
             --primary: #2563eb;
-            --primary-glow: rgba(37, 99, 235, 0.35);
+            --primary-glow: rgba(37, 99, 235, 0.4);
             --accent: #10b981;
             --text-dark: #0f172a;
             --text-muted: #475569;
@@ -23,6 +29,10 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
@@ -62,7 +72,19 @@
             margin: 0 auto 60px auto;
         }
 
-        /* --- Tlačítka --- */
+        /* --- ANIMACE PŘI SKROLOVÁNÍ --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- TLAČÍTKA --- */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -103,7 +125,7 @@
             transform: translateY(-2px);
         }
 
-        /* --- HERO SEKCE --- */
+        /* --- HERO SEKCE S GLOW EFEKTEM --- */
         .hero {
             background: radial-gradient(circle at 50% 0%, #1e293b 0%, #0f172a 100%);
             color: #ffffff;
@@ -112,13 +134,25 @@
             overflow: hidden;
         }
 
+        /* Světelná záře na pozadí */
+        .hero-glow {
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(37,99,235,0.3) 0%, rgba(0,0,0,0) 70%);
+            pointer-events: none;
+        }
+
         .hero::before {
             content: "";
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
             background-size: 30px 30px;
-            opacity: 0.3;
+            opacity: 0.5;
         }
 
         .hero-content {
@@ -157,7 +191,34 @@
         .hero p {
             font-size: 1.3rem;
             color: #94a3b8;
+            margin-bottom: 35px;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
             margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 10px 20px;
+            border-radius: 12px;
+            backdrop-filter: blur(5px);
+        }
+
+        .stat-value {
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: #60a5fa;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #94a3b8;
         }
 
         .hero-btns {
@@ -180,7 +241,6 @@
             border-radius: 16px;
             padding: 36px 28px;
             transition: all 0.3s ease;
-            position: relative;
         }
 
         .card:hover {
@@ -322,7 +382,6 @@
             padding: 50px;
             text-align: center;
             box-shadow: 0 20px 40px -10px var(--primary-glow);
-            position: relative;
         }
 
         .price-tag {
@@ -363,7 +422,7 @@
             font-size: 1.2rem;
         }
 
-        /* --- FAQ --- */
+        /* --- ROZBALOVACÍ FAQ (AKORDEON) --- */
         .faq-grid {
             display: grid;
             gap: 16px;
@@ -374,19 +433,44 @@
         .faq-card {
             background: #ffffff;
             border: 1px solid var(--border);
-            padding: 28px;
+            padding: 24px;
             border-radius: 16px;
+            cursor: pointer;
+            transition: border-color 0.2s;
         }
 
-        .faq-card h4 {
-            font-size: 1.1rem;
+        .faq-card:hover {
+            border-color: var(--primary);
+        }
+
+        .faq-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             font-weight: 700;
-            margin-bottom: 8px;
+            font-size: 1.1rem;
         }
 
-        .faq-card p {
+        .faq-icon {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, margin-top 0.3s ease;
             color: var(--text-muted);
             font-size: 0.95rem;
+        }
+
+        .faq-card.open .faq-body {
+            max-height: 200px;
+            margin-top: 12px;
+        }
+
+        .faq-card.open .faq-icon {
+            transform: rotate(45deg);
         }
 
         /* --- KONTAKT --- */
@@ -399,12 +483,6 @@
             margin-bottom: 80px;
             position: relative;
             overflow: hidden;
-        }
-
-        .contact-section h2 {
-            font-size: 2.8rem;
-            font-weight: 800;
-            margin-bottom: 16px;
         }
 
         .contact-card {
@@ -449,6 +527,7 @@
 
     <!-- HERO HEADER -->
     <header class="hero">
+        <div class="hero-glow"></div>
         <div class="container">
             <div class="hero-content">
                 <div class="price-badge">
@@ -456,6 +535,22 @@
                 </div>
                 <h1>Moderní & rychlý web pro vaše podnikání</h1>
                 <p>Vytvořím přehlednou a reprezentativní prezentaci, která okamžitě osloví vaše zákazníky. Bez měsíčních poplatků a bez složitostí.</p>
+                
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">100 / 100</div>
+                        <div class="stat-label">Google Speed Score</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">< 0.3 s</div>
+                        <div class="stat-label">Rychlost načtení</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">0 Kč</div>
+                        <div class="stat-label">Měsíční správa</div>
+                    </div>
+                </div>
+
                 <div class="hero-btns">
                     <a href="#kontakt" class="btn">Chci nový web</a>
                     <a href="#reference" class="btn-outline">Ukázka práce</a>
@@ -465,7 +560,7 @@
     </header>
 
     <!-- HLAVNÍ VÝHODY -->
-    <section class="section">
+    <section class="section reveal">
         <div class="container">
             <h2 class="section-title">Co vám statický web přinese?</h2>
             <p class="section-subtitle">Jednoduchost je nejsilnější nástroj dnešního webu. Žádný balast, jen to podstatné.</p>
@@ -496,7 +591,7 @@
     </section>
 
     <!-- JAK TO PROBÍHÁ -->
-    <section class="section process-section">
+    <section class="section process-section reveal">
         <div class="container">
             <h2 class="section-title">Jak probíhá spolupráce?</h2>
             <p class="section-subtitle">Tři jednoduché kroky k vaší nové prezentaci na internetu.</p>
@@ -522,7 +617,7 @@
     </section>
 
     <!-- REFERENCE Z OBRÁZKU -->
-    <section class="section" id="reference">
+    <section class="section reveal" id="reference">
         <div class="container">
             <h2 class="section-title">Ukázka mé práce</h2>
             <p class="section-subtitle">Podívejte se na reálnou ukázku statické prezentace.</p>
@@ -543,7 +638,7 @@
     </section>
 
     <!-- FIXNÍ CENÍK -->
-    <section class="section">
+    <section class="section reveal">
         <div class="container">
             <h2 class="section-title">Garantovaná cena</h2>
             <p class="section-subtitle">Žádné skryté poplatky. Přesně víte, kolik zaplatíte.</p>
@@ -555,64 +650,4 @@
 
                 <ul class="price-features">
                     <li>Kompletní jednostránkový (on-page) design</li>
-                    <li>Plná responzivita pro mobily i PC</li>
-                    <li>Otevírací doba, ceník, fotogalerie</li>
-                    <li>Mapy, rozcestník a kontaktní tlačítka</li>
-                    <li>Pomoc s výběrem domény a hostingem</li>
-                    <li><strong>ZDARMA:</strong> Pomoc s nahráním index.html na hosting</li>
-                </ul>
-
-                <a href="#kontakt" class="btn" style="width: 100%;">Chci nový web za 3 000 Kč</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ -->
-    <section class="section">
-        <div class="container">
-            <h2 class="section-title">Často kladené dotazy</h2>
-            <p class="section-subtitle">Vše, co potřebujete před začátkem vědět.</p>
-
-            <div class="faq-grid">
-                <div class="faq-card">
-                    <h4>Jak probíhá platba?</h4>
-                    <p>Před začátkem prací na webu se hradí záloha ve výši 50 % (1 500 Kč). Druhá polovina se doplácí až ve chvíli, kdy je web kompletně hotový a připravený ke spuštění.</p>
-                </div>
-                <div class="faq-card">
-                    <h4>Pomůžete mi s nahráním webu na internet?</h4>
-                    <p>Ano! Rádi vám pomůžeme s nákupem domény i s technickým nahráním hotového souboru index.html na váš webhosting, aby byl web ihned funkční.</p>
-                </div>
-                <div class="faq-card">
-                    <h4>Proč zvolit statický web místo WordPressu?</h4>
-                    <p>Statický web neobsahuje žádnou databázi, načítá se bleskově, nelze jej snadno napadnout hackery a nevyžaduje neustálé placené aktualizace.</p>
-                </div>
-                <div class="faq-card">
-                    <h4>Jak dlouho trvá výroba webu?</h4>
-                    <p>Jakmile obdržím podklady a zálohu, web bývá hotový zpravidla do 3 až 7 dnů.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- KONTAKT SEKCE -->
-    <section class="container" id="kontakt">
-        <div class="contact-section">
-            <h2>Máte zájem o nový web?</h2>
-            <p>Napište mi vaši představu a pustíme se do práce.</p>
-
-            <div class="contact-card">
-                <div class="contact-name">Milan "ace321cz" Kortus</div>
-                <a href="mailto:ace321cz@gmail.com" class="contact-email">ace321cz@gmail.com</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 Milan Kortus. Všechna práva vyhrazena.</p>
-        </div>
-    </footer>
-
-</body>
-</html>
+                    <li>Plná responzivita pro mobily i PC
