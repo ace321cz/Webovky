@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Milan Kortus | Tvorba moderních statických webů</title>
 
-    <!-- Meta tagy pro sociální sítě (WhatsApp, Facebook, Messenger) -->
+    <!-- Meta tagy pro sociální sítě -->
     <meta property="og:title" content="Milan Kortus | Tvorba moderních statických webů">
     <meta property="og:description" content="Kompletní reprezentativní web pro vaše podnikání za 3 000 Kč. Blesková rychlost, nulové měsíční poplatky.">
     <meta property="og:type" content="website">
@@ -52,13 +52,13 @@
         }
 
         .section {
-            padding: 100px 0;
+            padding: 90px 0;
             position: relative;
         }
 
         .section-title {
             text-align: center;
-            font-size: 2.5rem;
+            font-size: 2.3rem;
             font-weight: 800;
             letter-spacing: -0.02em;
             margin-bottom: 16px;
@@ -66,22 +66,10 @@
 
         .section-subtitle {
             text-align: center;
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             color: var(--text-muted);
             max-width: 650px;
-            margin: 0 auto 60px auto;
-        }
-
-        /* --- ANIMACE PŘI SKROLOVÁNÍ --- */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
+            margin: 0 auto 50px auto;
         }
 
         /* --- TLAČÍTKA --- */
@@ -125,16 +113,15 @@
             transform: translateY(-2px);
         }
 
-        /* --- HERO SEKCE S GLOW EFEKTEM --- */
+        /* --- HERO SEKCE --- */
         .hero {
             background: radial-gradient(circle at 50% 0%, #1e293b 0%, #0f172a 100%);
             color: #ffffff;
-            padding: 120px 0 140px 0;
+            padding: 100px 0 120px 0;
             position: relative;
             overflow: hidden;
         }
 
-        /* Světelná záře na pozadí */
         .hero-glow {
             position: absolute;
             top: -100px;
@@ -178,7 +165,7 @@
         }
 
         .hero h1 {
-            font-size: 3.8rem;
+            font-size: 3.5rem;
             font-weight: 800;
             line-height: 1.15;
             letter-spacing: -0.03em;
@@ -189,7 +176,7 @@
         }
 
         .hero p {
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             color: #94a3b8;
             margin-bottom: 35px;
         }
@@ -197,7 +184,7 @@
         .hero-stats {
             display: flex;
             justify-content: center;
-            gap: 30px;
+            gap: 20px;
             margin-bottom: 40px;
             flex-wrap: wrap;
         }
@@ -319,11 +306,11 @@
             background: #ffffff;
             border: 1px solid var(--border);
             border-radius: 24px;
-            padding: 60px;
+            padding: 50px;
             box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.05);
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 60px;
+            gap: 50px;
             align-items: center;
         }
 
@@ -332,7 +319,7 @@
             padding: 12px;
             border-radius: 36px;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            max-width: 320px;
+            max-width: 300px;
             margin: 0 auto;
             border: 4px solid #334155;
         }
@@ -422,7 +409,7 @@
             font-size: 1.2rem;
         }
 
-        /* --- ROZBALOVACÍ FAQ (AKORDEON) --- */
+        /* --- FAQ --- */
         .faq-grid {
             display: grid;
             gap: 16px;
@@ -516,7 +503,7 @@
         }
 
         @media (max-width: 900px) {
-            .hero h1 { font-size: 2.6rem; }
+            .hero h1 { font-size: 2.5rem; }
             .portfolio-wrapper { grid-template-columns: 1fr; padding: 30px; text-align: center; }
             .steps-grid { grid-template-columns: 1fr; }
             .price-box { padding: 30px; }
@@ -539,15 +526,15 @@
                 <div class="hero-stats">
                     <div class="stat-item">
                         <div class="stat-value">100 / 100</div>
-                        <div class="stat-label">Google Speed Score</div>
+                        <div class="stat-label">Google Speed</div>
                     </div>
                     <div class="stat-item">
                         <div class="stat-value">< 0.3 s</div>
-                        <div class="stat-label">Rychlost načtení</div>
+                        <div class="stat-label">Načtení</div>
                     </div>
                     <div class="stat-item">
                         <div class="stat-value">0 Kč</div>
-                        <div class="stat-label">Měsíční správa</div>
+                        <div class="stat-label">Měsíčně</div>
                     </div>
                 </div>
 
@@ -560,7 +547,7 @@
     </header>
 
     <!-- HLAVNÍ VÝHODY -->
-    <section class="section reveal">
+    <section class="section">
         <div class="container">
             <h2 class="section-title">Co vám statický web přinese?</h2>
             <p class="section-subtitle">Jednoduchost je nejsilnější nástroj dnešního webu. Žádný balast, jen to podstatné.</p>
@@ -591,7 +578,7 @@
     </section>
 
     <!-- JAK TO PROBÍHÁ -->
-    <section class="section process-section reveal">
+    <section class="section process-section">
         <div class="container">
             <h2 class="section-title">Jak probíhá spolupráce?</h2>
             <p class="section-subtitle">Tři jednoduché kroky k vaší nové prezentaci na internetu.</p>
@@ -616,8 +603,8 @@
         </div>
     </section>
 
-    <!-- REFERENCE Z OBRÁZKU -->
-    <section class="section reveal" id="reference">
+    <!-- REFERENCE SHOWCASE -->
+    <section class="section" id="reference">
         <div class="container">
             <h2 class="section-title">Ukázka mé práce</h2>
             <p class="section-subtitle">Podívejte se na reálnou ukázku statické prezentace.</p>
@@ -638,7 +625,7 @@
     </section>
 
     <!-- FIXNÍ CENÍK -->
-    <section class="section reveal">
+    <section class="section">
         <div class="container">
             <h2 class="section-title">Garantovaná cena</h2>
             <p class="section-subtitle">Žádné skryté poplatky. Přesně víte, kolik zaplatíte.</p>
@@ -650,4 +637,13 @@
 
                 <ul class="price-features">
                     <li>Kompletní jednostránkový (on-page) design</li>
-                    <li>Plná responzivita pro mobily i PC
+                    <li>Plná responzivita pro mobily i PC</li>
+                    <li>Otevírací doba, ceník, fotogalerie</li>
+                    <li>Mapy, rozcestník a kontaktní tlačítka</li>
+                    <li>Pomoc s výběrem domény a hostingem</li>
+                    <li><strong>ZDARMA:</strong> Pomoc s nahráním index.html na hosting</li>
+                </ul>
+
+                <a href="#kontakt" class="btn" style="width: 100%;">Chci nový web za 3 000 Kč</a>
+            </div>
+      
