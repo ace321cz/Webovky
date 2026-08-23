@@ -85,7 +85,7 @@
             border-radius: 12px;
             transition: all 0.2s ease;
             text-align: center;
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
         }
 
         .btn:hover {
@@ -111,12 +111,17 @@
             background: rgba(255, 255, 255, 0.18);
         }
 
-        /* --- HERO SEKCE --- */
+        /* --- HERO SEKCE S BASE64 GRAFIKOU NA POZAĎÍ --- */
         .hero {
             background: #0f172a;
+            /* Vektory a mřížka generovaná v Base64 */
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.25), transparent 70%),
+                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23334155' fill-opacity='0.15'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
             color: #ffffff;
-            padding: 80px 0;
+            padding: 90px 0;
             text-align: center;
+            position: relative;
         }
 
         .price-badge {
@@ -159,6 +164,7 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             padding: 8px 16px;
             border-radius: 10px;
+            backdrop-filter: blur(4px);
         }
 
         .stat-value {
@@ -190,11 +196,23 @@
             border: 1px solid var(--border);
             border-radius: 16px;
             padding: 24px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
         }
 
         .card-icon {
-            font-size: 1.8rem;
-            margin-bottom: 12px;
+            width: 48px;
+            height: 48px;
+            background: rgba(37, 99, 235, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
         }
 
         .card h3 {
@@ -258,20 +276,56 @@
             grid-template-columns: 1fr 1fr;
             gap: 30px;
             align-items: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
         }
 
         .mockup-phone {
             background: #0f172a;
-            padding: 10px;
-            border-radius: 24px;
-            max-width: 250px;
+            padding: 12px;
+            border-radius: 28px;
+            max-width: 260px;
             margin: 0 auto;
+            box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.3);
+            border: 2px solid #1e293b;
         }
 
-        .mockup-phone img {
+        .mockup-screen {
             width: 100%;
-            display: block;
-            border-radius: 16px;
+            height: 320px;
+            background: #0f172a;
+            border-radius: 18px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+            /* Base64 pozadí pro ukázkový náhled */
+            background-image: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        }
+
+        .mockup-logo {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #38bdf8;
+            margin-bottom: 8px;
+        }
+
+        .mockup-desc {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-bottom: 16px;
+        }
+
+        .mockup-badge {
+            background: var(--primary);
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 6px 12px;
+            border-radius: 6px;
         }
 
         .portfolio-info h3 {
@@ -374,6 +428,7 @@
         /* --- KONTAKT --- */
         .contact-section {
             background: #0f172a;
+            background-image: radial-gradient(circle at 100% 100%, rgba(37, 99, 235, 0.15), transparent 50%);
             color: #ffffff;
             border-radius: 20px;
             padding: 50px 20px;
@@ -445,7 +500,7 @@
         </div>
     </header>
 
-    <!-- HLAVNÍ VÝHODY -->
+    <!-- HLAVNÍ VÝHODY S INTEGROVANÝMI SVG IKONAMI -->
     <section class="section">
         <div class="container">
             <h2 class="section-title">Co vám statický web přinese?</h2>
@@ -453,22 +508,30 @@
             
             <div class="grid-4">
                 <div class="card">
-                    <div class="card-icon">⚡</div>
+                    <div class="card-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                    </div>
                     <h3>Okamžité načtení</h3>
                     <p>Žádné čekání. Stránka se zobrazí v setině sekundy na jakémkoliv zařízení.</p>
                 </div>
                 <div class="card">
-                    <div class="card-icon">📱</div>
+                    <div class="card-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+                    </div>
                     <h3>Perfektní na mobilu</h3>
                     <p>Design je vyladěn tak, aby se skvěle ovládal na telefonech i velkých monitorech.</p>
                 </div>
                 <div class="card">
-                    <div class="card-icon">🎯</div>
+                    <div class="card-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
+                    </div>
                     <h3>Jasná nabídka</h3>
                     <p>Zákazníci okamžitě najdou vaši nabídku, ceník, otevírací dobu i kontakty.</p>
                 </div>
                 <div class="card">
-                    <div class="card-icon">🔒</div>
+                    <div class="card-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                    </div>
                     <h3>Nulová údržba</h3>
                     <p>Žádné aktualizace systémů ani řešení bezpečnosti. Web prostě funguje.</p>
                 </div>
@@ -510,7 +573,11 @@
 
             <div class="portfolio-wrapper">
                 <div class="mockup-phone">
-                    <img src="reference_nahled.jpg" alt="Náhled webu Kiosek Na Dvorku" onerror="this.src='https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&auto=format&fit=crop&q=80'">
+                    <div class="mockup-screen">
+                        <div class="mockup-logo">Kiosek Na Dvorku</div>
+                        <div class="mockup-desc">Občerstvení & Letní terasa</div>
+                        <div class="mockup-badge">Otevřeno</div>
+                    </div>
                 </div>
                 <div class="portfolio-info">
                     <h3>Kiosek Na Dvorku</h3>
@@ -530,81 +597,4 @@
             <p class="section-subtitle">Žádné skryté poplatky. Přesně víte, kolik zaplatíte.</p>
 
             <div class="price-box">
-                <h3>Kompletní Statický Web</h3>
-                <div class="price-tag">3 000 Kč</div>
-                <div class="price-subnote">Platba: 50 % záloha předem, 50 % po dokončení</div>
-
-                <ul class="price-features">
-                    <li>Kompletní jednostránkový (on-page) design</li>
-                    <li>Plná responzivita pro mobily i PC</li>
-                    <li>Otevírací doba, ceník, fotogalerie</li>
-                    <li>Mapy, rozcestník a kontaktní tlačítka</li>
-                    <li>Pomoc s výběrem domény a hostingem</li>
-                    <li><strong>ZDARMA:</strong> Pomoc s nahráním index.html na hosting</li>
-                </ul>
-
-                <a href="mailto:ace321cz@gmail.com?subject=Z%C3%A1jem%20o%20nov%C3%BD%20web%20za%203%20000%20K%C4%8D&body=Dobr%C3%BD%20den,%0A%0Am%C3%A1m%20z%C3%A1jem%20o%20vytvo%C5%99en%C3%AD%20webu%20za%203%20000%20K%C4%8D." class="btn" style="width: 100%;">Chci nový web za 3 000 Kč</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ -->
-    <section class="section">
-        <div class="container">
-            <h2 class="section-title">Často kladené dotazy</h2>
-            <p class="section-subtitle">Odpovědi na nejčastější otázky ohledně tvorby webu.</p>
-
-            <div class="faq-grid">
-                <div class="faq-card">
-                    <div class="faq-header">Jak probíhá platba?</div>
-                    <div class="faq-body">
-                        Před začátkem prací na webu se hradí záloha ve výši 50 % (1 500 Kč). Druhá polovina se doplácí až ve chvíli, kdy je web kompletně hotový a připravený ke spuštění.
-                    </div>
-                </div>
-
-                <div class="faq-card">
-                    <div class="faq-header">Pomůžete mi s nahráním webu na internet?</div>
-                    <div class="faq-body">
-                        Ano! Rádi vám pomůžeme s nákupem domény i s technickým nahráním hotového souboru index.html na váš webhosting, aby byl web ihned funkční.
-                    </div>
-                </div>
-
-                <div class="faq-card">
-                    <div class="faq-header">Proč zvolit statický web místo WordPressu?</div>
-                    <div class="faq-body">
-                        Statický web neobsahuje žádnou databázi, načítá se bleskově, nelze jej snadno napadnout hackery a nevyžaduje neustálé placené aktualizace.
-                    </div>
-                </div>
-
-                <div class="faq-card">
-                    <div class="faq-header">Jak dlouho trvá výroba webu?</div>
-                    <div class="faq-body">
-                        Jakmile obdržím podklady a zálohu, web bývá hotový zpravidla do 3 až 7 dnů.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- KONTAKT SEKCE -->
-    <section class="container" id="kontakt">
-        <div class="contact-section">
-            <h2>Máte zájem o nový web?</h2>
-            <p>Napište mi vaši představu a pustíme se do práce.</p>
-
-            <div class="contact-card">
-                <div class="contact-name">Milan Kortus</div>
-                <a href="mailto:ace321cz@gmail.com" class="contact-email">ace321cz@gmail.com</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 Milan Kortus. Všechna práva vyhrazena.</p>
-        </div>
-    </footer>
-
-</body>
-</html>
+           
