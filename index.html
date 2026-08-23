@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Milan Kortus | Tvorba moderních statických webů</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-glow: rgba(37, 99, 235, 0.35);
+            --accent: #10b981;
+            --text-dark: #0f172a;
+            --text-muted: #475569;
+            --bg-light: #f8fafc;
+            --card-bg: #ffffff;
+            --border: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 650px;
+            margin: 0 auto 60px auto;
+        }
+
+        /* --- Tlačítka --- */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--primary);
+            color: #ffffff;
+            font-weight: 700;
+            padding: 16px 36px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px -5px var(--primary-glow);
+            transition: all 0.25s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px -5px var(--primary-glow);
+            background-color: #1d4ed8;
+        }
+
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.05);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-weight: 600;
+            padding: 16px 32px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            transition: all 0.25s ease;
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        /* --- HERO SEKCE --- */
+        .hero {
+            background: radial-gradient(circle at 50% 0%, #1e293b 0%, #0f172a 100%);
+            color: #ffffff;
+            padding: 120px 0 140px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .price-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+            border: 1px solid rgba(52, 211, 153, 0.3);
+            font-size: 0.95rem;
+            font-weight: 700;
+            padding: 8px 20px;
+            border-radius: 30px;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-size: 3.8rem;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            margin-bottom: 24px;
+            background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: #94a3b8;
+            margin-bottom: 40px;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* --- KARTY SLUŽEB --- */
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 36px 28px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.07);
+            border-color: #cbd5e1;
+        }
+
+        .card-icon {
+            width: 56px;
+            height: 56px;
+            background: #eff6ff;
+            color: var(--primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* --- SEKCE PROCESU --- */
+        .process-section {
+            background: #ffffff;
+            border-y: 1px solid var(--border);
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .step-card {
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px 30px;
+            position: relative;
+        }
+
+        .step-num {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            opacity: 0.15;
+            position: absolute;
+            top: 15px; right: 20px;
+            line-height: 1;
+        }
+
+        .step-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .step-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* --- REFERENCE SHOWCASE --- */
+        .portfolio-wrapper {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 60px;
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.05);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .mockup-phone {
+            background: #0f172a;
+            padding: 12px;
+            border-radius: 36px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            max-width: 320px;
+            margin: 0 auto;
+            border: 4px solid #334155;
+        }
+
+        .mockup-phone img {
+            width: 100%;
+            display: block;
+            border-radius: 24px;
+        }
+
+        .portfolio-info h3 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .portfolio-info p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            margin-bottom: 30px;
+        }
+
+        .portfolio-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--text-dark);
+            color: #ffffff;
+            font-weight: 600;
+            padding: 14px 28px;
+            border-radius: 10px;
+            transition: background 0.2s;
+        }
+
+        .portfolio-btn:hover {
+            background: #334155;
+        }
+
+        /* --- CENÍK --- */
+        .price-box {
+            background: #ffffff;
+            border: 2px solid var(--primary);
+            border-radius: 24px;
+            max-width: 650px;
+            margin: 0 auto;
+            padding: 50px;
+            text-align: center;
+            box-shadow: 0 20px 40px -10px var(--primary-glow);
+            position: relative;
+        }
+
+        .price-tag {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin: 20px 0 5px 0;
+            letter-spacing: -0.03em;
+        }
+
+        .price-subnote {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+
+        .price-features {
+            text-align: left;
+            margin: 30px 0;
+            list-style: none;
+        }
+
+        .price-features li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+        }
+
+        .price-features li::before {
+            content: "✓";
+            color: var(--accent);
+            font-weight: 800;
+            font-size: 1.2rem;
+        }
+
+        /* --- FAQ --- */
+        .faq-grid {
+            display: grid;
+            gap: 16px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-card {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            padding: 28px;
+            border-radius: 16px;
+        }
+
+        .faq-card h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .faq-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* --- KONTAKT --- */
+        .contact-section {
+            background: #0f172a;
+            color: #ffffff;
+            border-radius: 32px;
+            padding: 80px 40px;
+            text-align: center;
+            margin-bottom: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-section h2 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .contact-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px 40px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-top: 30px;
+        }
+
+        .contact-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .contact-email {
+            font-size: 1.25rem;
+            color: #60a5fa;
+            font-weight: 600;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+        }
+
+        @media (max-width: 900px) {
+            .hero h1 { font-size: 2.6rem; }
+            .portfolio-wrapper { grid-template-columns: 1fr; padding: 30px; text-align: center; }
+            .steps-grid { grid-template-columns: 1fr; }
+            .price-box { padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HERO HEADER -->
+    <header class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="price-badge">
+                    <span>•</span> Kompletní web za 3 000 Kč
+                </div>
+                <h1>Moderní & rychlý web pro vaše podnikání</h1>
+                <p>Vytvořím přehlednou a reprezentativní prezentaci, která okamžitě osloví vaše zákazníky. Bez měsíčních poplatků a bez složitostí.</p>
+                <div class="hero-btns">
+                    <a href="#kontakt" class="btn">Chci nový web</a>
+                    <a href="#reference" class="btn-outline">Ukázka práce</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- HLAVNÍ VÝHODY -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Co vám statický web přinese?</h2>
+            <p class="section-subtitle">Jednoduchost je nejsilnější nástroj dnešního webu. Žádný balast, jen to podstatné.</p>
+            
+            <div class="grid-4">
+                <div class="card">
+                    <div class="card-icon">⚡</div>
+                    <h3>Okamžité načtení</h3>
+                    <p>Žádné čekání. Stránka se zobrazí v setině sekundy na jakémkoliv zařízení.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📱</div>
+                    <h3>Perfektní na mobilu</h3>
+                    <p>Design je vyladěn tak, aby se skvěle ovládal na telefonech i velkých monitorech.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🎯</div>
+                    <h3>Jasná nabídka</h3>
+                    <p>Zákazníci okamžitě najdou vaši nabídku, ceník, otevírací dobu i kontakty.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🔒</div>
+                    <h3>Nulová údržba</h3>
+                    <p>Žádné aktualizace systémů ani řešení bezpečnosti. Web prostě funguje.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- JAK TO PROBÍHÁ -->
+    <section class="section process-section">
+        <div class="container">
+            <h2 class="section-title">Jak probíhá spolupráce?</h2>
+            <p class="section-subtitle">Tři jednoduché kroky k vaší nové prezentaci na internetu.</p>
+            
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-num">01</div>
+                    <h3>1. Zadání & Záloha</h3>
+                    <p>Pošlete mi texty a fotky. Před zahájením prací se hradí záloha 50 % z ceny webu.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">02</div>
+                    <h3>2. Tvorba & Doladění</h3>
+                    <p>Připravím kompletní návrh webu ke schválení. Případné drobné úpravy společně zapracujeme.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">03</div>
+                    <h3>3. Doplatek & Spuštění</h3>
+                    <p>Po doplacení zbytku ceny nahrajeme hotový web na váš hosting. S nahráním vám rád pomohu.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- REFERENCE Z OBRÁZKU -->
+    <section class="section" id="reference">
+        <div class="container">
+            <h2 class="section-title">Ukázka mé práce</h2>
+            <p class="section-subtitle">Podívejte se na reálnou ukázku statické prezentace.</p>
+
+            <div class="portfolio-wrapper">
+                <div class="mockup-phone">
+                    <img src="reference_nahled.jpg" alt="Náhled webu Kiosek Na Dvorku" onerror="this.src='https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&auto=format&fit=crop&q=80'">
+                </div>
+                <div class="portfolio-info">
+                    <h3>Kiosek Na Dvorku</h3>
+                    <p>Čistý, přehledný a extrémně rychlý web vytvořený pro občerstvení. Zákazník na mobilu ihned vidí otevírací dobu, menu, lokalitu i tlačítko pro okamžité zavolání.</p>
+                    <a href="https://kioseknadvorku.fun/" target="_blank" rel="noopener" class="portfolio-btn">
+                        Navštívit kioseknadvorku.fun ↗
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FIXNÍ CENÍK -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Garantovaná cena</h2>
+            <p class="section-subtitle">Žádné skryté poplatky. Přesně víte, kolik zaplatíte.</p>
+
+            <div class="price-box">
+                <h3>Kompletní Statický Web</h3>
+                <div class="price-tag">3 000 Kč</div>
+                <div class="price-subnote">Platba: 50 % záloha předem, 50 % po dokončení</div>
+
+                <ul class="price-features">
+                    <li>Kompletní jednostránkový (on-page) design</li>
+                    <li>Plná responzivita pro mobily i PC</li>
+                    <li>Otevírací doba, ceník, fotogalerie</li>
+                    <li>Mapy, rozcestník a kontaktní tlačítka</li>
+                    <li>Pomoc s výběrem domény a hostingem</li>
+                    <li><strong>ZDARMA:</strong> Pomoc s nahráním index.html na hosting</li>
+                </ul>
+
+                <a href="#kontakt" class="btn" style="width: 100%;">Chci nový web za 3 000 Kč</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Často kladené dotazy</h2>
+            <p class="section-subtitle">Vše, co potřebujete před začátkem vědět.</p>
+
+            <div class="faq-grid">
+                <div class="faq-card">
+                    <h4>Jak probíhá platba?</h4>
+                    <p>Před začátkem prací na webu se hradí záloha ve výši 50 % (1 500 Kč). Druhá polovina se doplácí až ve chvíli, kdy je web kompletně hotový a připravený ke spuštění.</p>
+                </div>
+                <div class="faq-card">
+                    <h4>Pomůžete mi s nahráním webu na internet?</h4>
+                    <p>Ano! Rádi vám pomůžeme s nákupem domény i s technickým nahráním hotového souboru index.html na váš webhosting, aby byl web ihned funkční.</p>
+                </div>
+                <div class="faq-card">
+                    <h4>Proč zvolit statický web místo WordPressu?</h4>
+                    <p>Statický web neobsahuje žádnou databázi, načítá se bleskově, nelze jej snadno napadnout hackery a nevyžaduje neustálé placené aktualizace.</p>
+                </div>
+                <div class="faq-card">
+                    <h4>Jak dlouho trvá výroba webu?</h4>
+                    <p>Jakmile obdržím podklady a zálohu, web bývá hotový zpravidla do 3 až 7 dnů.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- KONTAKT SEKCE -->
+    <section class="container" id="kontakt">
+        <div class="contact-section">
+            <h2>Máte zájem o nový web?</h2>
+            <p>Napište mi vaši představu a pustíme se do práce.</p>
+
+            <div class="contact-card">
+                <div class="contact-name">Milan "ace321cz" Kortus</div>
+                <a href="mailto:ace321cz@gmail.com" class="contact-email">ace321cz@gmail.com</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Milan Kortus. Všechna práva vyhrazena.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
